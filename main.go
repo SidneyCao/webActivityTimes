@@ -17,10 +17,25 @@ func main() {
 func getTimes(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	uid := r.Form["uid"]
-	sid := r.Form["sid"]
-	fmt.Println(uid[0], sid[0])
+	bsid := r.Form["sid"]
+	var sid string
 
-	cmd := fmt.Sprintf("LC_ALL=C fgrep %s %s/%s/* | wc -l", uid[0], logDir, sid[0])
+	switch bsid[0] {
+	case "6006", "6007":
+		sid = "6005"
+	case "6009", "6010":
+		sid = "6008"
+	case "6012", "6013", "6014", "6015", "6016", "6017":
+		sid = "6011"
+	case "6019", "6020":
+		sid = "6018"
+	default:
+		sid = bsid[0]
+	}
+
+	fmt.Println(uid[0], bsid[0], sid)
+
+	cmd := fmt.Sprintf("LC_ALL=C fgrep %s %s/%s/* | wc -l", uid[0], logDir, sid)
 	out, err := exec.Command("/bin/bash", "-c", cmd).Output()
 
 	if err != nil {
