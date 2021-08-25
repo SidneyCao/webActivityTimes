@@ -19,7 +19,7 @@ func getTimes(w http.ResponseWriter, r *http.Request) {
 	uid := r.Form["uid"]
 	sid := r.Form["sid"]
 	fmt.Println(uid[0], sid[0])
-	cmd := fmt.Sprintf("grep lottery %s/%s/* | grep %s | wc -l", logDir, sid[0], uid[0])
+	cmd := fmt.Sprintf("grep lottery %s/%s/* | grep '{\"jid\":\"109'| grep %s | wc -l", logDir, sid[0], uid[0])
 	out, err := exec.Command("/bin/bash", "-c", cmd).Output()
 	if err != nil {
 		log.Panic(err)
