@@ -41,11 +41,13 @@ func getTimes(w http.ResponseWriter, r *http.Request) {
 		log.Panic(err)
 	}
 
-	cmdTotal := fmt.Sprintf("wc -l %s/*/* | grep total | awk -F ' ' '{print $1}'", logDir)
-	outTotal, err := exec.Command("/bin/bash", "-c", cmdTotal).Output()
-	if err != nil {
-		log.Panic(err)
-	}
+	//cmdTotal := fmt.Sprintf("wc -l %s/*/* | grep total | awk -F ' ' '{print $1}'", logDir)
+	/*
+		outTotal, err := exec.Command("/bin/bash", "-c", cmdTotal).Output()
+		if err != nil {
+			log.Panic(err)
+		}
+	*/
 
-	fmt.Fprint(w, string(out), string(outTotal))
+	fmt.Fprint(w, string(out))
 }
