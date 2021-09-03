@@ -35,7 +35,7 @@ func getTimes(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(uid[0], bsid[0], sid)
 
-	cmd := fmt.Sprintf("LC_ALL=C fgrep %s %s/%s/* | wc -l", uid[0], logDir, sid)
+	cmd := fmt.Sprintf("LC_ALL=C fgrep %s %s/%s/lottery.log | wc -l", uid[0], logDir, sid)
 	out, err := exec.Command("/bin/bash", "-c", cmd).Output()
 	if err != nil {
 		log.Panic(err)
